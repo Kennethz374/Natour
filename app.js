@@ -25,6 +25,14 @@ app.get('/api/v1/tours', (req, res) => {
     .json({ status: 'success', result: tours.length, data: { tours: tours } });
 });
 
+app.get('/api/v1/tours/:id/:x?/:y?', (req, res) => {
+  console.log(req.params);
+  res.status(200).json({
+    status: 'success'
+    // result: tours.length, data: { tours: tours }
+  });
+});
+
 app.post(`/api/v1/tours`, (req, res) => {
   // console.log(req.body);
   const newId = tours[tours.length - 1].id + 1;
@@ -43,6 +51,7 @@ app.post(`/api/v1/tours`, (req, res) => {
     }
   );
 });
+
 const PORT = 3008;
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
