@@ -5,6 +5,16 @@ const app = express(); // add methods to app
 
 app.use(express.json()); //need this middleware to access the "req.body"
 
+app.use((req, res, next) => {
+  console.log('Hello from the middleware  👽');
+  next();
+});
+
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
+
 //next function in third argument
 //middleware will touch every single request because we didn't specific any routes
 
@@ -13,8 +23,10 @@ const tours = JSON.parse(
 );
 
 const getAllTours = (req, res) => {
+  console.log(req.requestTime);
   res.status(200).json({
     status: 'success',
+    requestedAt: req.requestTime,
     result: tours.length,
     data: { tours: tours }
   });
@@ -87,16 +99,12 @@ app
   .get(getAllTours)
   .post(createTour);
 
-app.use((req, res, next) => {
-  console.log('Hello from the middleware  👽');
-  next();
-});
-
 app
   .route(`/api/v1/tours/:id`)
   .get(getTour)
   .patch(updateTour)
   .delete(deleteTour);
+//route handler
 
 const PORT = 3008;
 app.listen(PORT, () => {
