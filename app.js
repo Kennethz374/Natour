@@ -5,6 +5,8 @@ const app = express(); // add methods to app
 
 app.use(express.json()); //need this middleware to access the "req.body"
 
+app.use((req, res, next) => {}); //next function in third argument
+
 const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
