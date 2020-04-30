@@ -122,23 +122,28 @@ const deleteUser = (req, res) => {
 };
 
 //3) routes
-app
-  .route('/api/v1/tours')
+const tourRouter = express.Router();
+const userRouter = express.Router();
+app.use('/api/v1/tours', tourRouter);
+app.use('/api/v1/tours', userRouter);
+
+tourRouter
+  .route('/')
   .get(getAllTours)
   .post(createTour);
 
-app
-  .route(`/api/v1/tours/:id`)
+tourRouter
+  .route(`/:id`)
   .get(getTour)
   .patch(updateTour)
   .delete(deleteTour);
 
-app
+userRouter
   .route(`/api/v1/users`)
   .get(getAllUsers)
   .post(createUser);
 
-app
+userRouter
   .route(`/api/v1/users/:id`)
   .get(getUser)
   .patch(updateUser)
