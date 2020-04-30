@@ -5,10 +5,8 @@ const app = express(); // add methods to app
 
 app.use(express.json()); //need this middleware to access the "req.body"
 
-app.use((req, res, next) => {
-  console.log('Hello from the middleware  👽');
-  next();
-}); //next function in third argument
+//next function in third argument
+//middleware will touch every single request because we didn't specific any routes
 
 const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
@@ -88,6 +86,11 @@ app
   .route('/api/v1/tours')
   .get(getAllTours)
   .post(createTour);
+
+app.use((req, res, next) => {
+  console.log('Hello from the middleware  👽');
+  next();
+});
 
 app
   .route(`/api/v1/tours/:id`)
