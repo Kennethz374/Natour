@@ -1,8 +1,11 @@
 const fs = require('fs');
 const express = require('express');
+const morgan = require('morgan');
 
 const app = express(); // add methods to app
 
+// 1) middleware
+app.use(morgan('dev')); // logging req ex: GET /api/v1/tours 200 19.412 ms - 8681
 app.use(express.json()); //need this middleware to access the "req.body"
 
 app.use((req, res, next) => {
@@ -15,13 +18,11 @@ app.use((req, res, next) => {
   next();
 });
 
-//next function in third argument
-//middleware will touch every single request because we didn't specific any routes
-
 const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
 
+// 2) route handlers
 const getAllTours = (req, res) => {
   console.log(req.requestTime);
   res.status(200).json({
@@ -94,6 +95,7 @@ const deleteTour = (req, res) => {
   });
 };
 
+//3) routes
 app
   .route('/api/v1/tours')
   .get(getAllTours)
@@ -104,8 +106,8 @@ app
   .get(getTour)
   .patch(updateTour)
   .delete(deleteTour);
-//route handler
 
+//4) start server
 const PORT = 3008;
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
