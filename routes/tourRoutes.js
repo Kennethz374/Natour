@@ -11,12 +11,11 @@ const tourController = require('../controllers/tourController');
 const router = express.Router();
 
 router.param('id', tourController.checkID);
-//middleware for only the tour route with id
 
 router
   .route('/')
   .get(tourController.getAllTours)
-  .post(tourController.createTour);
+  .post(tourController.checkBody, tourController.createTour);
 
 router
   .route(`/:id`)

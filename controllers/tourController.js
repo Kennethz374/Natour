@@ -12,7 +12,17 @@ exports.checkID = (req, res, next, val) => {
     });
   }
   next();
-}; //this middleware helps to check ID before hiting the route. keep route just for route.
+};
+
+exports.checkBody = (req, res, next) => {
+  if (!req.body.name || !req.body.price) {
+    return res.status(400).json({
+      status: 'fail',
+      message: 'invalid request'
+    });
+  }
+  next();
+};
 
 exports.getAllTours = (req, res) => {
   console.log(req.requestTime);
@@ -34,7 +44,6 @@ exports.getTour = (req, res) => {
 };
 
 exports.createTour = (req, res) => {
-  // console.log(req.body);
   const newId = tours[tours.length - 1].id + 1;
   const newTour = Object.assign({ id: newId }, req.body);
 
