@@ -9,6 +9,7 @@ const app = express(); // add methods to app
 // 1) middleware
 app.use(morgan('dev')); // logging req ex: GET /api/v1/tours 200 19.412 ms - 8681
 app.use(express.json()); //need this middleware to access the "req.body"
+// app.use(express.static(`${__dirname}/public`)); serving static files
 
 app.use((req, res, next) => {
   console.log('Hello from the middleware  👽');
