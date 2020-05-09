@@ -13,7 +13,8 @@ mongoose
   .connect(DB, {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useUnifiedTopology: true
   })
   .then(() => {
     console.log('DB connection successful');
@@ -31,7 +32,21 @@ const tourSchema = new mongoose.Schema({
 
 const Tour = mongoose.model('Tour', tourSchema);
 
+const testTour = new Tour({
+  name: 'the Park camper',
+  // rating: 4.7,
+  price: 997
+});
+
+testTour
+  .save() //save data to database
+  .then(doc => {
+    console.log(doc);
+  })
+  .catch(err => console.log('ERRRRRRRRROR', err));
+
 const PORT = process.env.PORT || 3010;
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
+//notes for MVC model in express
