@@ -50,3 +50,4 @@ app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
 //notes for MVC model in express
+//MVC MODEL part 2
