@@ -51,3 +51,4 @@ app.listen(PORT, () => {
 });
 //notes for MVC model in express
 //MVC MODEL part 2
+//BUSINESS LOGIC VS APP LOGIC
