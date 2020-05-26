@@ -55,3 +55,4 @@ if (process.argv[2] === `--import`) {
   deleteData();
 }
 console.log(process.argv);
+//use ---import or delete from cmd to import or delete data
