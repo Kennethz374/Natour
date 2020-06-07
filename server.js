@@ -14,7 +14,7 @@ mongoose
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
   .then(() => {
     console.log('DB connection successful');
@@ -27,3 +27,4 @@ app.listen(PORT, () => {
 //notes for MVC model in express
 //MVC MODEL part 2
 //BUSINESS LOGIC VS APP LOGIC
+//out of town
